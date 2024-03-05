@@ -1,15 +1,19 @@
 #include <stdio.h>
- 
-int binario(int decimal)
-{
-    if (decimal == 0)
-        return 0;
-    else
-        return (decimal % 2 + 10 * binario(decimal / 2));
-}
 
+int findbinary(decimal) {
+    if (decimal > 0) {
+        findbinary(decimal/2);
+        printf("%d", decimal % 2);
+    
+    }
+
+}
 int main()
 {
-    int decimal = 12;
-    printf("%d", binario(decimal));
+    int decimal = 10;
+    findbinary(decimal);
+    return 0;
+    
+   
 }
+

@@ -10,7 +10,7 @@ int findbinary(decimal) {
 }
 int main()
 {
-    int decimal = 10;
+    int decimal = 12;
     findbinary(decimal);
     return 0;
     

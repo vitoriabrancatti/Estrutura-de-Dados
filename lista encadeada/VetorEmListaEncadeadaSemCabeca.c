@@ -8,15 +8,20 @@ struct cel {
 
 typedef struct cel celula;
 
-celula* insere(celula *lst, int x) {
+void insere(celula *lst, int x) {
     celula *novo = malloc(sizeof(celula));
     novo->conteudo = x;
-    novo->seg = NULL;
-    celula *temp;
-
-    temp->seg = novo;
-    return lst;
+    novo->seg = lst->seg;
+    lst->seg = novo;
 }
+
+celula *primeiroelemento(celula *prox, int x) {
+    celula *novo = malloc(sizeof(celula));
+    novo->conteudo = x;
+    novo->seg = prox;
+    return novo;
+}
+
 
 void imprimirLista(celula *lst) {
     celula *temp;
@@ -27,29 +32,17 @@ void imprimirLista(celula *lst) {
 }
 
 int main() {
-    celula *lista = NULL;
-
     int vetor[5] = {10, 20, 30, 40, 50};
-
-    lista = malloc(sizeof(celula));
-    lista->conteudo = vetor[0];
-    lista->seg = NULL;
-
-    celula *ultimo = lista; 
+    celula *lista = NULL;
+    lista = primeiroelemento(lista, vetor[0]);
 
     for (int i = 1; i < 5; i++) {
-        celula *novo = malloc(sizeof(celula));
-
-        novo->conteudo = vetor[i];
-        novo->seg = NULL;
-
-        ultimo->seg = novo; 
-        ultimo = novo;
+        insere(lista, vetor[i]);
     }
 
     imprimirLista(lista);
-
     return 0;
+    
 }
 
 

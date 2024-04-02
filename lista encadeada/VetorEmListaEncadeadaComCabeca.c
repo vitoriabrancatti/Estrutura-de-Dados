@@ -8,39 +8,44 @@ struct cel {
 
 typedef struct cel celula;
 
-celula* insere(celula *lst, int x) {
-    celula *novo = malloc(sizeof(celula));
-    novo->conteudo = x;
-    novo->seg = lst->seg;
-    lst->seg = novo;
-    return lst;
+celula *criarLista() {
+    celula *cabeca = malloc(sizeof(celula));
+    cabeca->seg = NULL; 
+    return cabeca;
 }
 
+void insere(celula *lst, int x) {
+    celula *novo = malloc(sizeof(celula));
+    novo->conteudo = x;
+    novo->seg = NULL;
+
+    celula *temp = lst;
+    while (temp->seg != NULL) {
+        temp = temp->seg; 
+    }
+    temp->seg = novo; 
+}
+
+
 void imprimirLista(celula *lst) {
-    celula *t;
-    for (t = lst->seg; t != NULL; t = t->seg) {
-        printf("%d ", t->conteudo);
+    celula *temp;
+    for (temp = lst->seg; temp != NULL; temp = temp->seg) {
+        printf("%d ", temp->conteudo);
     }
     printf("\n");
 }
 
 int main() {
-    celula *lista = malloc(sizeof(celula));
-    lista->seg = NULL; // Cabeça
-
     int vetor[5] = {10, 20, 30, 40, 50};
+    celula *lista = criarLista();
 
     for (int i = 0; i < 5; i++) {
-        lista = insere(lista, vetor[i]);
+        insere(lista, vetor[i]);
     }
 
     imprimirLista(lista);
-
-    celula *t;
-    for (t = lista; lista != NULL; t = lista) {
-        lista = lista->seg;
-        free(t);
-    }
-
     return 0;
+    
 }
+
+
